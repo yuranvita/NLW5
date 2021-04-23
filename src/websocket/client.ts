@@ -2,6 +2,7 @@ import {io} from '../http';
 import {ConnectionsService} from '../services/ConnectionsService';
 import {UsersService} from '../services/UsersService';
 import {MessagesServices} from '../services/MessagesService';
+import { User } from '../entities/User';
 
 interface IParams {
   text : string,
@@ -23,14 +24,16 @@ io.on("connect" , (socket ) =>{
 
     const userExists = await usersService.findByEmail(email);
     
+    
     if(!userExists){
      const user = await usersService.create(email);
-  
+     const gambiarra = await usersService.findByEmail(email);
+      
       await connectionsService.create({
         socket_id,
-        user_id : user
+        user_id : gambiarra.id
       });
-      user_id = userExists.id; // muder depois
+      user_id = gambiarra.id; // Gambiarra
     }else{
       user_id = userExists.id
       const connection = await connectionsService.findByUserId(userExists.id);
