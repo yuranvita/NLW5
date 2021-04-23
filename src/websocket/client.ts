@@ -28,7 +28,7 @@ io.on("connect" , (socket ) =>{
   
       await connectionsService.create({
         socket_id,
-        user_id : userExists.id
+        user_id : user
       });
       user_id = userExists.id; // muder depois
     }else{

@@ -16,13 +16,13 @@ class UsersService {
     if(userExists){
       return (`Este email : ${email} já existe!`);
     }
-    
+
     const user = this.usersRepository.create({
       email
     });
     
     await this.usersRepository.save(user);
-  
+    
     return user;
   }
 
