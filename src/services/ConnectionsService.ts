@@ -1,5 +1,5 @@
 import { getCustomRepository, Repository } from "typeorm";
-import { Connections } from "../entities/Connection";
+import { Connection } from "../entities/Connection";
 import { ConnectionsRepository } from '../repositories/ConnectionsRepository'
 
 interface IConnectionCreate{
@@ -10,7 +10,7 @@ interface IConnectionCreate{
 }
 
 class ConnectionsService{
-  private connectionsRepository : Repository<Connections>
+  private connectionsRepository : Repository<Connection>
 
   constructor(){
     this.connectionsRepository = getCustomRepository(ConnectionsRepository);
@@ -50,6 +50,16 @@ class ConnectionsService{
   const connection = await this.connectionsRepository.findOne({socket_id});
 
   return connection;
+  }
+
+  async updateAdminID(user_id : string , admin_id : string){
+    await this.connectionsRepository
+    .createQueryBuilder()
+    .update(Connection)
+    .set({admin_id})
+    .where("user_id = :user_id" , {
+      user_id
+    }).execute();
   }
 }
 

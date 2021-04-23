@@ -102,15 +102,18 @@ document.querySelector("#start_chat").addEventListener("click", (event) => {
 
 
 
-document.getElementById('send_message_button').addEventListener('click' , event => {
+document
+.getElementById('#send_message_button')
+.addEventListener('click' , event => {
     const text = document.getElementById("message_user");
 
     const params = {
-      text ,
+      text: text.value,
       socket_admin_id
     }
 
-    socket.emit("#client_send_to_admin" , params);
+    
+    socket.emit("client_send_to_admin" , params);
 
     const template_client = document.getElementById("message-user-template").innerHTML;
 
@@ -119,7 +122,10 @@ document.getElementById('send_message_button').addEventListener('click' , event 
       email : emailUser
     });
   
+ 
+  
   document.getElementById("messages").innerHTML += rendered;
+ 
   
 });
 

@@ -1,8 +1,8 @@
 import { EntityRepository, Repository } from "typeorm";
-import {Connections} from '../entities/Connection';
+import {Connection} from '../entities/Connection';
 
 
-@EntityRepository(Connections)
-class ConnectionsRepository extends Repository<Connections>{}
+@EntityRepository(Connection)
+class ConnectionsRepository extends Repository<Connection>{}
 
 export {ConnectionsRepository}
